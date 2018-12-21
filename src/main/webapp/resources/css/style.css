@@ -1,0 +1,26 @@
+/*h1 {
+    font-size: 30px !important;    
+    text-align: center;
+    border-bottom: 1px solid #999;
+    padding-bottom: 10px;
+}*/
+
+.ui-panel-content {
+    padding: 0 !important;
+}
+.ui-datatable-scrollable-body.rowSelected {
+    max-height: 200px !important;
+}
+
+/*tr.ui-datatable-selectable[aria-selected="true"] {    
+}*/
+/*.ui-panel a[id$="closer"] */
+
+/*.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    background-color: #9C27B0 !important;
+}*/
+
+/*.dtCabecera tr.ui-state-highlight {
+    color: white !important;
+}*/
+

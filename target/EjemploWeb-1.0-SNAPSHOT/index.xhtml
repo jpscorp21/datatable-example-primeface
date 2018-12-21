@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head> 
+        <!--<h:outputStylesheet name="css/layout-wine.css" library="ultima-layout" />-->
+        <link href="resources/css/style.css" type="text/css" rel="stylesheet" />
+        <link href="resources/css/layout-wine.css" type="text/css" rel="stylesheet" />
+
+    </h:head>
+
+    <h:body>   
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card card-w-title">
+
+                    <div id="content">
+                        <h:form id="formcab">
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:commandButton actionListener="#{paisBean.listar()}" value="Listar" update="dtPaises"></p:commandButton>        
+                            <p:commandButton actionListener="#{paisBean.vaciar()}" value="Vaciar" update="dtPaises"></p:commandButton>        
+                            <h1>Lista de Paises</h1>
+                            <p:dataTable value="#{paisBean.paises}"                                               
+                                         var="p"                                              
+                                         lazy="true"
+                                         selection="#{paisBean.selectedPais}" 
+                                         selectionMode="single"
+                                         rowKey="#{p.idPais}"
+                                         rowIndexVar="indice"
+                                         emptyMessage="La tabla no contiene datos"
+                                         draggableColumns="true"
+                                         resizableColumns="true"
+                                         sortMode="multiple"
+                                         paginator="true" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15,20,30,40,50,60,70,80,90,100"                              
+                                         paginatorPosition="top"                                                      
+                                         rows="20"
+                                         scrollRows="10" scrollable="true" scrollHeight="99%"
+                                         rowStatePreserved="true"                            
+                                         frozenColumns="" 
+                                         widgetVar="wdg_dt"
+                                         tableStyle="table-layout:fixed;width:100%;"     
+                                         styleClass="dataTable"
+                                         class="dtCabecera"
+                                         id="dtPaises">
+
+                                <f:facet name="header">
+
+                                    <p:outputPanel id="op_toolbar" styleClass="op_toolbar">
+                                        <p:outputPanel>
+
+                                            <p:commandButton value="Nuevo"
+                                                             icon="fa fa-plus"
+                                                             immediate="true"
+                                                             process="@this">                                
+                                            </p:commandButton>
+
+                                            <p:commandButton value="Editar"
+                                                             icon="fa fa-edit"
+                                                             immediate="true"
+                                                             process="@this">                                
+                                            </p:commandButton>
+
+                                            <p:commandButton value="Eliminar"
+                                                             icon="fa fa-trash-o"
+                                                             immediate="true"
+                                                             process="@this">                                
+                                            </p:commandButton>
+
+                                            <p:commandButton value="Detalle"
+                                                             icon="fa fa-folder-open-o"
+                                                             immediate="true"
+                                                             process="@this">                                
+                                            </p:commandButton>                                                        
+
+                                        </p:outputPanel>
+                                    </p:outputPanel>
+
+                                </f:facet>
+                                <p:ajax event="rowSelect" listener="#{paisBean.onRowSelect}" update=":formdet"></p:ajax>
+                                <!--<p:ajax event="rowUnselect" listener="#{paisBean.onRowUnselect}" update=":form:msgs"></p:ajax>-->
+                                <p:column headerText="Id" filterBy="#{p.idPais}" filterMatchMode="contains">
+                                    <p:outputLabel value="#{p.idPais}"></p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Pais" filterBy="#{p.pais}" filterMatchMode="contains">
+                                    <h:outputText value="#{p.pais}"></h:outputText>
+                                </p:column>            
+                                <p:column headerText="Capital" filterBy="#{p.capital}" filterMatchMode="contains">
+                                    <h:outputText value="#{p.capital}"></h:outputText>
+                                </p:column>            
+
+
+                            </p:dataTable >   
+                        </h:form>
+                        <h:form id="formdet">
+                            <p:panel id="detalle" header="Detalle" toggleable="true" toggleSpeed="0" style="padding: 0;" rendered="#{paisBean.ocultarDetalle}">
+                                <p:dataTable value="#{paisBean.selectedPais.ciudades}" 
+                                             var="c"                                                  
+                                             lazy="true"                                             
+                                             rowKey="#{c.idCiudad}"
+                                             rowIndexVar="indice"                                                 
+                                             emptyMessage="La tabla no contiene datos"
+                                             draggableColumns="true"
+                                             resizableColumns="true"
+                                             sortMode="multiple"
+                                             paginator="true" 
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15,20,30,40,50,60,70,80,90,100"                              
+                                             paginatorPosition="bottom"                                                      
+                                             rows="20"
+                                             scrollRows="10" scrollable="true" scrollHeight="99%"
+                                             rowStatePreserved="true"                            
+                                             frozenColumns="" 
+                                             widgetVar="ciudadWidget"
+                                             tableStyle="table-layout:fixed;width:100%;"     
+                                             styleClass="dataTable"
+                                             id="dtCiudad">                                                                                                            
+                                    <p:column headerText="Ciudad" filterBy="#{c.idCiudad}" filterMatchMode="contains">
+                                        <h:outputText value="#{c.idCiudad}"></h:outputText>
+                                    </p:column>            
+                                    <p:column headerText="Capital" filterBy="#{c.ciudad}" filterMatchMode="contains">
+                                        <h:outputText value="#{c.ciudad}"></h:outputText>
+                                    </p:column>                                                                                            
+
+                                </p:dataTable>        
+
+                            </p:panel>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h:outputScript library="js" name="index.js" />
+        <h:outputStylesheet library="css" name="style.css"/>            
+        </h:body>
+
+
+        
+
+</html>

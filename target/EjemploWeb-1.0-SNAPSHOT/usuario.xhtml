@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>        
+    </h:head>
+ 
+    <h:body>       
+        <h:form id="registrationForm">
+            <p:panel header="Usuario Formulario" style="width: 500px;">            
+            
+        <h:panelGrid columns="2">
+                <p:outputLabel value="Username"></p:outputLabel>
+                <p:inputText id="username" label="UserName" value="#{usuarioBean.user.username}" ></p:inputText>
+                <p:outputLabel value="Password"></p:outputLabel>
+                <p:password id="password" label="Password" value="#{usuarioBean.user.password}" ></p:password>
+                <p:outputLabel value="FirstName"></p:outputLabel>
+                <p:inputText id="firstName" label="firstName" value="#{usuarioBean.user.firstName}" ></p:inputText>
+                <p:outputLabel value="lastName"></p:outputLabel>
+                <p:inputText id="lastName" label="lastName" value="#{usuarioBean.user.lastName}" ></p:inputText>
+                <p:outputLabel value="Email"></p:outputLabel>
+                <p:inputText id="email" label="email" value="#{usuarioBean.user.email}" ></p:inputText>
+                <p:commandButton action="#{usuarioBean.registrar()}" value="Registrar" update="registrationForm"></p:commandButton>
+            </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+    
+</html>
