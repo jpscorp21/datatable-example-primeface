@@ -8,7 +8,7 @@
 .ui-panel-content {
     padding: 0 !important;
 }
-.ui-datatable-scrollable-body.rowSelected {
+.ui-datatable-scrollable-body.heightAdjust {
     max-height: 200px !important;
 }
 

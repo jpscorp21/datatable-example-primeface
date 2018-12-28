@@ -27,7 +27,7 @@ and open the template in the editor.
                     <div id="content">
                         <h:form id="formcab">
                             <p:growl id="msgs" showDetail="true" />
-                            <p:commandButton actionListener="#{paisBean.listar()}" value="Listar" update="dtPaises"></p:commandButton>        
+                            <p:commandButton actionListener="#{paisBean.listar()}" onclick="addEventsDatatable()" value="Listar" update="dtPaises"></p:commandButton>        
                             <p:commandButton actionListener="#{paisBean.vaciar()}" value="Vaciar" update="dtPaises"></p:commandButton>        
                             <h1>Lista de Paises</h1>
                             <p:dataTable value="#{paisBean.paises}"                                               
